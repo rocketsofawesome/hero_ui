@@ -2,8 +2,13 @@
 
 #### Setup
 ```
-npm install
+yarn install
 yarn start
+```
+or
+```
+npm install
+npm start
 ```
 
 #### TODO
