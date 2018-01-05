@@ -31,7 +31,11 @@ class App extends Component {
   }
 
   filterHeroes(evt) {
-    //TODO set filteredHeroes based on search parameters
+    const query = evt.target.value.toLowerCase()
+    const filteredHeroes = this.state.fetchedHeroes.filter((hero) => {
+      return hero.alias.toLowerCase().indexOf(query) >= 0
+    })
+    this.setState({ filteredHeroes })
   }
 
   render() {
