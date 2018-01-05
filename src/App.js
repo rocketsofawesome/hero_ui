@@ -13,7 +13,21 @@ class App extends Component {
   }
 
   componentWillMount() {
-    //TODO call API and set fetchedHeroes and filteredHeroes
+    fetch('http://localhost:3000/api/heroes')
+      .then((response) => response.json())
+      .then(this.setHeroes.bind(this))
+      .catch(this.handleError.bind(this))
+  }
+
+  setHeroes (heroes) {
+    this.setState({
+      fetchedHeroes: heroes,
+      filteredHeroes: heroes
+    })
+  }
+
+  handleError (error) {
+    console.error('Error fetching heroes :(', error)
   }
 
   filterHeroes(evt) {
@@ -30,8 +44,8 @@ class App extends Component {
           <input onChange={evt => this.filterHeroes(evt)} />
         </header>
         <div>
-          {filteredHeroes.map((hero) => {
-            return (<Hero hero={hero} />)
+          {filteredHeroes.map((hero, index) => {
+            return (<Hero hero={hero} key={index} />)
           })}
         </div>
       </div>
