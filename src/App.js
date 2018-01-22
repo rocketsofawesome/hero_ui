@@ -12,7 +12,7 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     fetch('http://localhost:3000/api/heroes')
       .then((response) => response.json())
       .then(this.setHeroes.bind(this))
@@ -30,7 +30,7 @@ class App extends Component {
     console.error('Error fetching heroes :(', error)
   }
 
-  filterHeroes(evt) {
+  filterHeroes (evt) {
     const query = evt.target.value.toLowerCase()
     const filteredHeroes = this.state.fetchedHeroes.filter((hero) => {
       return hero.alias.toLowerCase().indexOf(query) >= 0
@@ -49,7 +49,7 @@ class App extends Component {
         </header>
         <div>
           {filteredHeroes.map((hero, index) => {
-            return (<Hero hero={hero} key={index} />)
+            return <Hero hero={hero} key={index} />
           })}
         </div>
       </div>
