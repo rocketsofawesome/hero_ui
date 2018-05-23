@@ -3,25 +3,46 @@ import logo from './logo.svg';
 import './App.css';
 import Hero from './components/Hero'
 
+const HEROES_ENDPOINT = 'http://localhost:3000/api/heroes';
+
+const fetchHeroes = async () => {
+  try{
+    const response = await fetch(HEROES_ENDPOINT);
+    const body = await response.json();
+    return body;
+  } catch(e){
+    console.warn('error loading endpoint', e);
+  }
+}
+
 class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      fetchedHeroes: [],
-      filteredHeroes: []
+      heroes: [],
+      filter: ''
     }
   }
 
   componentWillMount() {
-    //TODO call API and set fetchedHeroes and filteredHeroes
+    this.fetchHeroes();
+  }
+
+  fetchHeroes = async () => {
+    const heroes = await fetchHeroes();
+    this.setState({ heroes, filter: '' });
   }
 
   filterHeroes(evt) {
-    //TODO set filteredHeroes based on search parameters
+    this.setState({ filter: evt.target.value.toLowerCase() });
   }
 
   render() {
-    const { filteredHeroes } = this.state
+    const { heroes, filter } = this.state
+    const filteredHeroes = filter.length > 0
+      ? this.state.heroes.filter(hero => (hero.alias.toLowerCase().indexOf(filter) > -1))
+      : heroes;
+
     return (
       <div className="App">
         <header className="App-header">
@@ -31,7 +52,7 @@ class App extends Component {
         </header>
         <div>
           {filteredHeroes.map((hero) => {
-            return (<Hero hero={hero} />)
+            return (<Hero key={hero.alias} hero={hero} />)
           })}
         </div>
       </div>

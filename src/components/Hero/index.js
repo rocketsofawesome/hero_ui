@@ -1,10 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Hero = (hero) => {
+const Hero = ({ hero }) => {
   return(
-    <div>
-    //TODO create the hero component to display a heroes information
+    <div key={hero.alias}>
+      <h4>{hero.alias}</h4>
+      <div>{hero.affiliation}</div>
+      <div>
+        {hero.superpowers.map(power => (
+          <div key={power}>
+            {power}
+          </div>
+        ))}
+      </div>
     </div>
   )
 }
