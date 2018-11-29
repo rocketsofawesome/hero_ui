@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import Hero from './components/Hero'
+
+import axios from 'axios';
+import Hero from './components/Hero';
 
 class App extends Component {
   constructor (props) {
@@ -13,11 +15,17 @@ class App extends Component {
   }
 
   componentWillMount() {
-    //TODO call API and set fetchedHeroes and filteredHeroes
+    axios.get('http://localhost:3001/api/heroes').then(response => {
+      this.setState({ fetchedHeros: response.data, filteredHeroes: response.data }, () => { console.log(this.state.fetchedHeros) })
+    })
   }
 
-  filterHeroes(evt) {
-    //TODO set filteredHeroes based on search parameters
+  filterHeroes = (evt) => {
+    let matchedHeroes = this.state.fetchedHeros.filter((hero) => {
+      return hero.alias.toLowerCase().indexOf(evt.target.value.toLowerCase()) !== -1
+    })
+
+    this.setState({ filteredHeroes: matchedHeroes }, () => { console.log(this.state.filteredHeroes) });
   }
 
   render() {

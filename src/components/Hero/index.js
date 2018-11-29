@@ -4,7 +4,15 @@ import PropTypes from 'prop-types'
 const Hero = (hero) => {
   return(
     <div>
-    //TODO create the hero component to display a heroes information
+      <h1>{ hero.hero.alias }</h1>
+      <span>{ hero.hero.affiliation }</span>
+      <div>
+      { hero.hero.superpowers.map((item) => {
+        return(
+          <span>{ item.description }<br /></span>
+        );
+      }) }
+      </div>
     </div>
   )
 }
