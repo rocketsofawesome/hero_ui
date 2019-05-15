@@ -12,7 +12,7 @@ class App extends Component {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     //TODO call API and set fetchedHeroes and filteredHeroes
   }
 
