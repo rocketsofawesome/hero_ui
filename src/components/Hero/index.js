@@ -1,12 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const Hero = ({hero}) => {
-  return(
-    <div>
-    //TODO create the hero component to display a heroes information
-    </div>
-  )
+const Hero = ({ hero }) => {
+  // TODO: implement the hero component
+  return null
 }
 
 Hero.propTypes = {

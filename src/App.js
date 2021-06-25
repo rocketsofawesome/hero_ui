@@ -7,32 +7,32 @@ class App extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      fetchedHeroes: [],
-      filteredHeroes: []
-    }
+      heroes: []
+    };
+    this.filterHeroes = this.filterHeroes.bind(this);
   }
 
   componentDidMount() {
-    //TODO call API and set fetchedHeroes and filteredHeroes
+    // TODO call API and set heroes
   }
 
   filterHeroes(evt) {
-    //TODO set filteredHeroes based on search parameters
+    // TODO filter heroes based on the query
   }
 
   render() {
-    const { filteredHeroes } = this.state
+    const { heroes } = this.state
     return (
       <div className="App">
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Hero UI</h1>
-          <input onChange={evt => this.filterHeroes(evt)} />
+          <input onChange={this.filterHeroes} />
         </header>
         <div>
-          {filteredHeroes.map((hero) => {
-            return (<Hero hero={hero} />)
-          })}
+          {
+            heroes.map((hero, index) => <Hero hero={hero} key={index} />)
+          }
         </div>
       </div>
     );
